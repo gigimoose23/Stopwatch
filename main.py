@@ -1,24 +1,44 @@
 import tkinter
 import time
+import tkinter.messagebox
 root = tkinter.Tk()
 introLabel = tkinter.Label(root, text="Welcome to stopwatch app", font=("Arial", 16, "bold"))
 root.title("Stopwatch")
+totalTime = 0
+def logic():
+    global totalTime
+    
+    totalTime-=1
+    if totalTime == -1:
+        tkinter.messagebox.showinfo("Info", "Time is up!")
+        return
+    minutes, seconds = divmod(totalTime, 60)
+  
+    hours = 0
+    if minutes > 60:
+        hours,minutes = divmod(minutes, 60)
+          #  root.update()
+        
+            
+            
 
+    hour.set(str(hours))
+    min.set(str(minutes))
+    sec.set(str(seconds))
+    root.update()
+    root.after(1000, logic)
+   
+    
 def startTime():
+    global totalTime
     hourEntered = int(hour.get())
     minEntered = int(min.get())
     secEntered = int(sec.get())
     totalTime = (3600 * hourEntered) + (60 * minEntered) + secEntered
-    while True:
+    root.after(1000, logic)
 
             
-            minutes, seconds = divmod(totalTime, 60)
-            hours = 0
-            if minutes > 60:
-                hours,minutes = divmod(minutes, 60)
-            time.sleep(1)
-            totalTime -= 1
-
+            
 
 startButton = tkinter.Button(root, text="Start",command=startTime)
 
